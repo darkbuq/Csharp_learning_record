@@ -104,3 +104,6 @@ ProgressBarUpdateDelegate progressBarUpdateDelegate = UpdateProgressBar;
 
 接下來，你可以在適當的地方使用這些委派來調用相應的刷新函數，以完成刷新 UI 的操作  
 這樣可以根據不同的刷新類型區分程式碼，提高代碼的可讀性和可維護性。
+
+---
+
