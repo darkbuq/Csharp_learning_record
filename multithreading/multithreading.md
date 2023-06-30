@@ -1,5 +1,5 @@
 
-C#   多執行緒的寫法   我初步學會了  
+# C#   多執行緒的寫法   我初步學會了  
 我的理解如下    
 1 增加一個額外的執行緒   讓部分程式碼在這個執行緒 上跑  
 2 這額外的執行緒   跑的內容如果有關UI刷新  就做一個函數來刷新UI   +  一個委派    讓委派跑函數刷新UI  
@@ -39,7 +39,8 @@ private void AddMessage(int ii)
 ```
 
 ---  
-但是   如果我要放在背景的執行緒  
+# 但是   
+如果我要放在背景的執行緒  
 有很多部位  需要刷新UI  
 那我不就要做很多   刷新UI的函數出來
 
@@ -107,3 +108,64 @@ ProgressBarUpdateDelegate progressBarUpdateDelegate = UpdateProgressBar;
 
 ---
 
+# 最新作法  使用了 匿名  
+
+```csharp
+private void button1_Click(object sender, EventArgs e)
+{
+    Thread thr = new Thread(gogo_thread);
+    thr.Start();
+}
+
+
+private void gogo_thread()
+{
+    Action<string, string> some_one_delegate = delegate (string code, string str)
+    {
+        if (code == "=")
+        {
+            textBox1.Text = str;
+        }
+        else if (code == "+=")
+        {
+            textBox1.Text += str;
+        }
+
+    };
+
+    this.Invoke(some_one_delegate, "=","");
+
+
+    int i = 0;
+    while (true)
+    {
+        if (i % 10 == 0)
+        {
+            this.Invoke(some_one_delegate, "+=", Environment.NewLine);
+
+            //textBox1.Text += Environment.NewLine;
+        }
+        else
+        {
+            this.Invoke(some_one_delegate, "+=", i % 10 + ",");
+
+            //textBox1.Text += i % 10 + ",";
+        }
+
+        Thread.Sleep(500);
+        i++;
+    }
+}
+```
+
+---
+# Action<int> 是一個委派 (delegate) 類型  這種東西有很多嗎
+是的，C# 中有許多內建的委派類型，用於表示不同類型的方法。以下是一些常見的委派類型：
+
+1. `Action`: 表示不返回任何值的方法。可以帶有零到多個參數。
+2. `Func`: 表示返回值的方法。最後一個類型參數表示返回值的類型，前面的參數表示方法的參數。
+3. `Predicate`: 表示返回布林值的方法，通常用於進行條件判斷。
+4. `EventHandler`: 用於處理事件的方法，接受兩個參數，第一個是事件的發送者，第二個是事件的參數。
+5. `Comparison`: 用於比較兩個對象的方法，返回一個表示比較結果的整數值。
+
+除了這些內建的委派類型，你還可以自定義自己的委派類型，以滿足特定的需求。委派類型可以提高代碼的可讀性和靈活性，並促進代碼的重用性和模塊化設計。

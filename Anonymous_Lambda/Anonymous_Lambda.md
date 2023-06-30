@@ -1,5 +1,5 @@
 
-匿名方法和 Lambda 表達式都是用於表示未命名的方法  
+# 匿名方法和 Lambda 表達式都是用於表示未命名的方法  
 但它們在語法和用法上有所不同。
 
 匿名方法是一種在 C# 2.0 中引入的特性  
@@ -60,10 +60,7 @@ Action<int> printNumber = (number) => Console.WriteLine(number);
 　　　　顯式的函數簽名：(int p)、(int p1,int p2)、(ref int p1,out int p2)
 
 ---
-Action<int> 是一個委派 (delegate) 類型  
-這種東西有很多嗎
-
----
+# Action<int> 是一個委派 (delegate) 類型  這種東西有很多嗎
 是的，C# 中有許多內建的委派類型，用於表示不同類型的方法。以下是一些常見的委派類型：
 
 1. `Action`: 表示不返回任何值的方法。可以帶有零到多個參數。
