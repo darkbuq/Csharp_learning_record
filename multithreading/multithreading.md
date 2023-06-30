@@ -2,7 +2,41 @@
 C#   多執行緒的寫法   我初步學會了  
 我的理解如下    
 1 增加一個額外的執行緒   讓部分程式碼在這個執行緒 上跑  
-2 這額外的執行緒   跑的內容如果有關UI刷新  就做一個函數來刷新UI   +  一個委派    讓委派跑函數刷新UI
+2 這額外的執行緒   跑的內容如果有關UI刷新  就做一個函數來刷新UI   +  一個委派    讓委派跑函數刷新UI  
+
+```csharp
+private void btn_start_Click(object sender, EventArgs e)
+{
+    thr = new Thread(ShowMessage);//裡面有個迴圈  在背景執行緒跑
+    thr.Start();
+}
+
+int i = 0;
+private void ShowMessage() //這個函數 在另外的執行緒上跑
+{
+    DelShowMessage del = new DelShowMessage(AddMessage); 
+    while (true)
+    {
+        //UI控制全部移去委派做
+        //textBox2.Text = i.ToString();
+        //textBox1.Text = DateTime.Now + Environment.NewLine;
+        //UI控制全部移去委派做
+
+        this.Invoke(del, i);
+        //this.Invoke(printNumber, i);
+
+        Thread.Sleep(1000);
+        i++;
+    }
+}
+
+private delegate void DelShowMessage(int sMessage);//宣告一個委派
+private void AddMessage(int ii)
+{
+    textBox2.Text = ii.ToString();
+    textBox1.Text += DateTime.Now + Environment.NewLine;
+}
+```
 
 ---  
 但是   如果我要放在背景的執行緒  
@@ -11,8 +45,10 @@ C#   多執行緒的寫法   我初步學會了
 
 這真的是高手的做法嗎  
 
-```
-如果在背景執行緒中有多個地方需要刷新 UI，確實可以將相關的刷新 UI 的程式碼分成多個函數。這樣可以更好地組織和管理程式碼，使其更具可讀性和可維護性。
+---  
+
+如果在背景執行緒中有多個地方需要刷新 UI，確實可以將相關的刷新 UI 的程式碼分成多個函數  
+這樣可以更好地組織和管理程式碼，使其更具可讀性和可維護性。
 
 以下是一些可能的方法，可以幫助組織和管理刷新 UI 的程式碼：
 
@@ -25,7 +61,7 @@ C#   多執行緒的寫法   我初步學會了
 雖然有多個刷新 UI 的函數可能會增加一些程式碼的數量，但它有助於提高代碼的可讀性和可維護性。這樣可以更清晰地理解每個刷新操作的目的和邏輯，並且可以更容易地進行修改和擴展。
 
 最終的設計取決於你的具體需求和項目的複雜性。有時，一個統一的刷新函數可能已足夠應對需求；而在其他情況下，多個刷新函數可以更好地組織和管理程式碼。
-```
+
 
 區分不同的刷新類型：根據不同的刷新類型  
 可以將相關的刷新 UI 的程式碼分組成不同的函數  
@@ -39,7 +75,9 @@ C#   多執行緒的寫法   我初步學會了
 
 在這種情況下，你可以定義多個不同的委派類型，每個類型對應一個特定的刷新類型。然後，你可以定義對應的刷新函數，並將它們分配給相應的委派。
 
-例如，假設你有一個委派類型 `TextBoxUpdateDelegate` 和 `ProgressBarUpdateDelegate`，分別用於處理文本框和進度條的刷新。你可以定義這些委派如下：
+例如  
+假設你有一個委派類型 `TextBoxUpdateDelegate` 和 `ProgressBarUpdateDelegate`  
+分別用於處理文本框和進度條的刷新。你可以定義這些委派如下：
 
 ```csharp
 public delegate void TextBoxUpdateDelegate(string text);
@@ -64,4 +102,5 @@ TextBoxUpdateDelegate textBoxUpdateDelegate = UpdateTextBox;
 ProgressBarUpdateDelegate progressBarUpdateDelegate = UpdateProgressBar;
 ```
 
-接下來，你可以在適當的地方使用這些委派來調用相應的刷新函數，以完成刷新 UI 的操作。這樣可以根據不同的刷新類型區分程式碼，提高代碼的可讀性和可維護性。
+接下來，你可以在適當的地方使用這些委派來調用相應的刷新函數，以完成刷新 UI 的操作  
+這樣可以根據不同的刷新類型區分程式碼，提高代碼的可讀性和可維護性。
