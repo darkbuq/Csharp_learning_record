@@ -22,3 +22,15 @@ Action<int> printNumber = (number) => Console.WriteLine(number);
 3. 支援表達式樹：Lambda 表達式可以用於表達式樹 (Expression Tree) 的建構，使其在某些情況下能夠進行更高級的操作。
 
 總的來說，Lambda 表達式相對於匿名方法更加簡潔和方便，並且提供了更多的功能和彈性。因此，在 C# 中，Lambda 表達式已經成為定義匿名函式的首選語法。
+
+
+---  
+匿名函數有兩種語法風格：Lambda表達式(lambda-expression)和匿名方法表達式(anonymous-method-expression)。在幾乎所有的情況下，Lambda表達式都比匿名方法表達式更爲簡介具有表現力。但現在C#語言中仍保留了後者，爲了向後兼容。  
+　　Lambda表達式：
+　　　　async可選 (匿名的函數簽名)=> (匿名的函數體)  
+　　匿名方法表達式：
+　　　　async可選 delegate (顯式的匿名函數簽名) 可選{代碼塊}  
+
+　　其中匿名的函數簽名可以包括兩種，一種是隱式的匿名函數簽名另一種是顯式的匿名函數簽名：  
+　　　　隱式的函數簽名：(p)、(p1,p1)  
+　　　　顯式的函數簽名：(int p)、(int p1,int p2)、(ref int p1,out int p2)
