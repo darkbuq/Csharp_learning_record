@@ -1,14 +1,13 @@
 # How can i foreach all buttons in winforms
-```
+```csharp
 foreach(var button in this.Controls.OfType<Button>())
 {
     do something...
 }
 ```
 ## 這種做法  有些control會沒訪問到  
+## 如果你的表格上有一些按鈕沒有被循環到，可能有以下幾個原因：
 ```
-如果你的表格上有一些按鈕沒有被循環到，可能有以下幾個原因：
-
 控件不是直接位於表單的Controls集合中：  
 Controls集合只包含直接位於表單上的控件，而不包括控件中的控件。  
 如果有一些按鈕是控件中的控件（例如其他面板或組合框），則它們不會出現在Controls集合中。  
