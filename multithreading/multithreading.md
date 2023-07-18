@@ -14,7 +14,7 @@ private void btn_start_Click(object sender, EventArgs e)
 int i = 0;
 private void ShowMessage() //這個函數 在另外的執行緒上跑
 {
-    DelShowMessage del = new DelShowMessage(AddMessage); 
+    DelShowMessage del = new DelShowMessage(AddMessage);//生成一個委派
     while (true)
     {
         //UI控制全部移去委派做
@@ -81,6 +81,7 @@ private void AddMessage(int ii)
 分別用於處理文本框和進度條的刷新。你可以定義這些委派如下：
 
 ```csharp
+//宣告 各種可能要用的委派   
 public delegate void TextBoxUpdateDelegate(string text);
 public delegate void ProgressBarUpdateDelegate(int value);
 ```
@@ -88,6 +89,10 @@ public delegate void ProgressBarUpdateDelegate(int value);
 然後，你可以定義對應的刷新函數，並將它們分配給相應的委派：
 
 ```csharp
+// 分配刷新函數給委派   下面 兩種寫法都行
+TextBoxUpdateDelegate textBoxUpdateDelegate = UpdateTextBox;
+ProgressBarUpdateDelegate progressBarUpdateDelegate = new ProgressBarUpdateDelegate(UpdateProgressBar);
+
 public void UpdateTextBox(string text)
 {
     // 更新文本框的程式碼
@@ -98,9 +103,7 @@ public void UpdateProgressBar(int value)
     // 更新進度條的程式碼
 }
 
-// 分配刷新函數給委派
-TextBoxUpdateDelegate textBoxUpdateDelegate = UpdateTextBox;
-ProgressBarUpdateDelegate progressBarUpdateDelegate = UpdateProgressBar;
+
 ```
 
 接下來，你可以在適當的地方使用這些委派來調用相應的刷新函數，以完成刷新 UI 的操作  
