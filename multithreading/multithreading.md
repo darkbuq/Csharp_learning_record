@@ -1,9 +1,12 @@
 
-# C#   多執行緒的寫法   我初步學會了  
-我的理解如下    
+# C#   多執行緒的寫法
+### 理解如下    
 1 增加一個額外的執行緒   讓部分程式碼在這個執行緒 上跑  
-2 這額外的執行緒   跑的內容如果有關UI刷新  就做一個函數來刷新UI   +  一個委派    讓委派跑函數刷新UI  
+2 這額外的執行緒   跑的內容如果有關UI刷新  
+就做一個函數來刷新UI   +  一個委派    讓委派跑函數刷新UI 
 
+---
+### 第一種寫法  純粹寫 不偷加 其他技巧
 ```csharp
 private void btn_start_Click(object sender, EventArgs e)
 {
@@ -11,159 +14,132 @@ private void btn_start_Click(object sender, EventArgs e)
     thr.Start();
 }
 
+private delegate void delegate1(int sMessage);//宣告一個委派
 int i = 0;
 private void ShowMessage() //這個函數 在另外的執行緒上跑
 {
-    DelShowMessage del = new DelShowMessage(AddMessage);//生成一個委派
+    delegate1 dd1 = new delegate1(refreshUI);//生成一個委派
     while (true)
     {
-        //UI控制全部移去委派做
-        //textBox2.Text = i.ToString();
-        //textBox1.Text = DateTime.Now + Environment.NewLine;
-        //UI控制全部移去委派做
-
-        this.Invoke(del, i);
-        //this.Invoke(printNumber, i);
+        this.Invoke(dd1, i);
 
         Thread.Sleep(1000);
         i++;
     }
 }
 
-private delegate void DelShowMessage(int sMessage);//宣告一個委派
-private void AddMessage(int ii)
+private void refreshUI(int numm)
 {
-    textBox2.Text = ii.ToString();
-    textBox1.Text += DateTime.Now + Environment.NewLine;
+    textBox2.Text = numm.ToString();
+}
+
+private void btn_stop_Click(object sender, EventArgs e)
+{
+    thr.Abort();
 }
 ```
+---
+### 但是   
+如果背景的執行緒  有很多部位  需要刷新UI  
+那就要做很多   刷新UI的函數出來
+
+`每個不同時間段 刷新的UI`  
+1. `不同的宣告委派` 
+2. 再來 `new委派`  
+3. 還需對映 `不同的函數刷新UI`
 
 ---  
-# 但是   
-如果我要放在背景的執行緒  
-有很多部位  需要刷新UI  
-那我不就要做很多   刷新UI的函數出來
+### 多執行緒 委派到主執行緒 多部位刷新UI  如何寫
+#### 以下是一些可能的方法，可以幫助組織和管理刷新 UI 的程式碼：
 
-這真的是高手的做法嗎  
+>區分不同的刷新類型：  
+>根據不同的刷新類型，可以將相關的刷新 UI 的程式碼分組成不同的函數。  
+>例如，可以有一個函數專門處理`TextBox`的刷新，另一個函數專門處理`label`的刷新
 
----  
+#### 不同的刷新類型  那就需要宣告  各種的委派
 
-如果在背景執行緒中有多個地方需要刷新 UI，確實可以將相關的刷新 UI 的程式碼分成多個函數  
-這樣可以更好地組織和管理程式碼，使其更具可讀性和可維護性。
+>根據不同的刷新類型將刷新 UI 的程式碼分組成不同的函數  
+>可以使用委派（Delegate）來達到這個目的  
+>委派可以用來封裝一個特定類型的方法，並允許將方法作為參數傳遞、存儲和調用。
 
-以下是一些可能的方法，可以幫助組織和管理刷新 UI 的程式碼：
-
-1. 區分不同的刷新類型：根據不同的刷新類型，可以將相關的刷新 UI 的程式碼分組成不同的函數。例如，可以有一個函數專門處理文本框的刷新，另一個函數專門處理進度條的刷新，以此類推。
-
-2. 使用參數化函數：如果刷新 UI 的程式碼之間存在共用的邏輯，可以考慮使用參數化的函數。這樣可以通過參數來指定需要刷新的 UI 元素和相關的資料，從而減少重複的程式碼。
-
-3. 封裝刷新邏輯：可以將刷新 UI 的程式碼封裝在獨立的類別或方法中，並根據需要調用相應的刷新函數。這樣可以將刷新邏輯集中管理，並提供統一的接口。
-
-雖然有多個刷新 UI 的函數可能會增加一些程式碼的數量，但它有助於提高代碼的可讀性和可維護性。這樣可以更清晰地理解每個刷新操作的目的和邏輯，並且可以更容易地進行修改和擴展。
-
-最終的設計取決於你的具體需求和項目的複雜性。有時，一個統一的刷新函數可能已足夠應對需求；而在其他情況下，多個刷新函數可以更好地組織和管理程式碼。
-
-
-區分不同的刷新類型：根據不同的刷新類型  
-可以將相關的刷新 UI 的程式碼分組成不同的函數  
-例如，可以有一個函數專門處理文本框的刷新  
-另一個函數專門處理進度條的刷新，以此類推
-
-這一段    不同的刷新類型  那就需要宣告  各種的委派   沒錯吧
-
-
-對的，如果要根據不同的刷新類型將刷新 UI 的程式碼分組成不同的函數，可以使用委派（Delegate）來達到這個目的。委派可以用來封裝一個特定類型的方法，並允許將方法作為參數傳遞、存儲和調用。
-
-在這種情況下，你可以定義多個不同的委派類型，每個類型對應一個特定的刷新類型。然後，你可以定義對應的刷新函數，並將它們分配給相應的委派。
 
 例如  
-假設你有一個委派類型 `TextBoxUpdateDelegate` 和 `ProgressBarUpdateDelegate`  
-分別用於處理文本框和進度條的刷新。你可以定義這些委派如下：
+>假設你有一個委派類型 `TextBox_Delegate` 和 `label_Delegate`  
+>分別用於處理文本框和進度條的刷新。你可以定義這些委派如下：
 
 ```csharp
 //宣告 各種可能要用的委派   
-public delegate void TextBoxUpdateDelegate(string text);
-public delegate void ProgressBarUpdateDelegate(int value);
-```
+public delegate void TextBox_Delegate(string text);
+public delegate void label_Delegate(Color color);
 
-然後，你可以定義對應的刷新函數，並將它們分配給相應的委派：
+//然後，你可以定義對應的刷新函數，並將它們分配給相應的委派：
 
-```csharp
 // 分配刷新函數給委派   下面 兩種寫法都行
-TextBoxUpdateDelegate textBoxUpdateDelegate = UpdateTextBox;
-ProgressBarUpdateDelegate progressBarUpdateDelegate = new ProgressBarUpdateDelegate(UpdateProgressBar);
+TextBox_Delegate Delegate1 = new TextBox_Delegate(Update_TextBox);
+label_Delegate Delegate2 = Update_label;
 
-public void UpdateTextBox(string text)
+public void Update_TextBox(string text)
 {
-    // 更新文本框的程式碼
+    txt_note.Text=text;
 }
 
-public void UpdateProgressBar(int value)
+public void Update_label(Color color)
 {
-    // 更新進度條的程式碼
+    label_5.BackColor = color;
 }
-
-
 ```
-
-接下來，你可以在適當的地方使用這些委派來調用相應的刷新函數，以完成刷新 UI 的操作  
-這樣可以根據不同的刷新類型區分程式碼，提高代碼的可讀性和可維護性。
+### 第二種寫法  new委派時 有新的寫法 更直覺
+```csharp
+TextBox_Delegate Delegate1 = new TextBox_Delegate(Update_TextBox);
+label_Delegate Delegate2 = Update_label; //第二種寫法
+```
 
 ---
-
-# 最新作法  使用了 匿名  
+### 第三種  使用了 匿名  
 
 ```csharp
 private void button1_Click(object sender, EventArgs e)
 {
-    Thread thr = new Thread(gogo_thread);
+    Thread thr = new Thread(realtime_RSSI);
     thr.Start();
 }
 
-
-private void gogo_thread()
+private void realtime_RSSI()
 {
-    Action<string, string> some_one_delegate = delegate (string code, string str)
-    {
-        if (code == "=")
-        {
-            textBox1.Text = str;
-        }
-        else if (code == "+=")
-        {
-            textBox1.Text += str;
-        }
-
-    };
-
-    this.Invoke(some_one_delegate, "=","");
-
-
-    int i = 0;
     while (true)
     {
-        if (i % 10 == 0)
+        string readStr = "A1F1A2F2A3F3A4F4A5F5A6F6A7F7A8F8";
+        List<string> cut8 = new List<string>();
+        for (int i = 0; i < 8; i++)
         {
-            this.Invoke(some_one_delegate, "+=", Environment.NewLine);
-
-            //textBox1.Text += Environment.NewLine;
-        }
-        else
-        {
-            this.Invoke(some_one_delegate, "+=", i % 10 + ",");
-
-            //textBox1.Text += i % 10 + ",";
+            cut8.Add(readStr.Substring(i * 4, 4));
         }
 
-        Thread.Sleep(500);
-        i++;
+        //不用寫 宣告委派   用C#內建現成的
+        //不用寫 刷新函數  要怎樣刷新 直接寫在後面 直接用
+        Action<List<string>> dgv_Update_Delegate3 = delegate (List<string> read_Hex)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                string revert_str = read_Hex[i].Substring(2, 2) + read_Hex[i].Substring(0, 2);
+                double mV = (float)Convert.ToInt32(revert_str, 16) * 2500 / 4096;
+                double uA = mV / 2.4 * 4;
+
+                dgv_Rx_RSSI.Rows[i].Cells[1].Value = mV.ToString("0.00");
+                dgv_Rx_RSSI.Rows[i].Cells[2].Value = uA.ToString("0.00");
+            }
+        };
+        this.Invoke(dgv_Update_Delegate3, cut8);
+
+        Thread.Sleep(1000);
     }
 }
 ```
-
 ---
-# Action<int> 是一個委派 (delegate) 類型  這種東西有很多嗎
-是的，C# 中有許多內建的委派類型，用於表示不同類型的方法。以下是一些常見的委派類型：
+### Action<int> 是一個 C# 原生 現成 委派 (delegate) 
+#### 這種東西有很多嗎
+C# 中有許多內建的委派類型，用於表示不同類型的方法  
+以下是一些常見的委派類型：
 
 1. `Action`: 表示不返回任何值的方法。可以帶有零到多個參數。
 2. `Func`: 表示返回值的方法。最後一個類型參數表示返回值的類型，前面的參數表示方法的參數。
