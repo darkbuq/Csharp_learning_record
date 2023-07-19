@@ -49,7 +49,8 @@ private void btn_stop_Click(object sender, EventArgs e)
 3. 還需對映 `不同的函數刷新UI`
 
 ---  
-### 多執行緒 委派到主執行緒 多部位刷新UI  如何寫
+### 多執行緒 委派到主執行緒 多部位刷新UI  如何寫.....
+#### 我問chatGPT的
 #### 以下是一些可能的方法，可以幫助組織和管理刷新 UI 的程式碼：
 
 >區分不同的刷新類型：  
