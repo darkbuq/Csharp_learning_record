@@ -57,6 +57,25 @@ finally
 }
 ```
 
+---
+
+### Exception 常用的屬性
+`Message` 取得描述目前例外狀況的訊息。  
+`Source` 取得或設定造成錯誤的應用程式或物件的名稱。  
+`StackTrace` 取得呼叫堆疊上即時運算框架的字串表示。  
+
+```csharp
+try 
+{
+    TestThrow ();
+} 
+catch (Exception ex) 
+{
+Console.WriteLine ($"ex.Message : {ex.Message}");
+Console.WriteLine ($"ex.Source : {ex.Source}");
+Console.WriteLine ($"ex.StackTrace : {ex.StackTrace}");
+}
+```
 
 
 ---
