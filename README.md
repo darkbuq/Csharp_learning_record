@@ -9,6 +9,10 @@
 [匿名 跟 Lambda  的差異](/Anonymous_Lambda/Anonymous_Lambda.md)  
 
 ---
+### 異常處理 例外處理
+[異常處理 例外處理](/Exception/Exception.md)  
+
+---
 ### winForm相關
 [How can i foreach all buttons in winforms](/winForm/foreach_Control.md)  
 
