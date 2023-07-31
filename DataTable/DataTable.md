@@ -32,7 +32,7 @@ private void button1_Click(object sender, EventArgs e)
 ```
 
 ### 指定位置的訪問
-```
+```csharp
 dataTable.Rows[1]["Name"].ToString()  
 ```
  
