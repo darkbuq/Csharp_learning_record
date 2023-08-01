@@ -84,7 +84,7 @@ wRange.Columns.AutoFit();
 ---
 ### DataTable to Excel  
 
-目前是土法練鋼 一個個cell自行塞值
+目前是土法練鋼 一個個cell自行塞值   可用
 ```csharp
 //set col
 for (int i = 0; i < dt.Columns.Count; i++)
