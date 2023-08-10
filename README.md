@@ -16,6 +16,7 @@
 ---
 ### 異常處理 例外處理
 [異常處理 例外處理](/Exception/Exception.md)  
+[轉型失敗的 異常](/TryParse/TryParse.md)  
 
 ---
 ### winForm相關
