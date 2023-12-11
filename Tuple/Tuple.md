@@ -9,6 +9,10 @@
 亦即寫一個新類別，把要返回的多項資訊包在這個類別裡面  
 然後讓函式返回這個自訂類別的物件。
 4. 使用 .NET 現成的 `System.Tuple`。
+5. 使用 valuetuple 為C# 7.0的新特性，.Net Framework 4.7以上版本可用
+
+原文網址：https://kknews.cc/news/8mo549g.html
+
   
 >如果只是比較簡單、或者用完即丟的場合，就沒必要寫一個新類別  
 >而可以選擇 .NET framework 提供的 Tuple  
@@ -41,5 +45,12 @@ static Tuple<int, string, string> GetPerson()
     return Tuple.Create(1, "Bill", "Gates");
 }
 ```
-
-
+---
+### 以`valuetuple`做為回傳
+```csharp
+static (int first, string second) GetPerson() 
+{    
+    return (1, "Bill");
+}
+var result = GetPerson();
+Console.Writeline($"{first},{second}");
