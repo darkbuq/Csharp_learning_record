@@ -26,15 +26,21 @@ Lambda 表達式是在 C# 3.0 中引入的一種更簡潔和方便的語法。
 
 使用匿名方法：
 ```csharp
+int val = 8;
 Action<int> printNumber = delegate (int number)
 {
     Console.WriteLine(number);
 };
+
+this.Invoke(printNumber, val);
 ```
 
 使用 Lambda 表達式：
 ```csharp
+int val = 8;
 Action<int> printNumber = (number) => Console.WriteLine(number);
+
+this.Invoke(printNumber, val);
 ```
 
 兩者的功能相同，都是定義了一個接受 int 參數並輸出到控制台的匿名函式。然而，Lambda 表達式相對於匿名方法具有以下差異：
