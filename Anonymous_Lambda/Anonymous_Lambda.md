@@ -4,26 +4,7 @@
 
 匿名方法是一種在 C# 2.0 中引入的特性  
 它通過使用 `delegate` 關鍵字來定義，並且可以包含程式碼塊  
-匿名方法可以用於替代具名方法，並且可以被賦值給委派類型的變數或參數。
-
-Lambda 表達式則是在 C# 3.0 中引入的一種簡潔的語法，用於表示匿名函式。  
-Lambda 表達式使用 `=>` 運算符，它的左側是輸入參數，右側是方法主體  
-Lambda 表達式可以用於替代匿名方法的使用，並且可以使用更簡潔的語法來表示。
-
-儘管兩者都可以表示未命名的方法，但它們在語法上有所不同  
-Lambda 表達式通常更簡潔和易讀，特別是在處理簡單的操作或 LINQ 查詢時  
-匿名方法在某些情況下仍然很有用，特別是在與舊版框架或委派相關的代碼中。
-
-總結來說，匿名方法和 Lambda 表達式都是用於表示未命名的方法  
-但它們的語法和用法略有不同  
-Lambda 表達式是在 C# 3.0 中引入的一種更簡潔和方便的語法。
-
---- 
-
-匿名方法和 Lambda 表達式都是用於定義匿名函式的語法形式  
-但它們在語法上有一些差異  
-下面是一個使用匿名方法和 Lambda 表達式的示例，可以看到它們之間的差異：
-
+匿名方法可以用於替代具名方法，並且可以被賦值給委派類型的變數或參數。  
 使用匿名方法：
 ```csharp
 int val = 8;
@@ -34,39 +15,26 @@ Action<int> printNumber = delegate (int number)
 
 this.Invoke(printNumber, val);
 ```
-
-使用 Lambda 表達式：
+  
+---
+### Lambda表達式  
+Lambda 表達式則是在 C# 3.0 中引入的一種簡潔的語法，用於表示匿名函式。  
+Lambda 表達式使用 `=>` 運算符，它的左側是輸入參數，右側是方法主體
+原本常見寫一個方法像這樣：
 ```csharp
-int val = 8;
-Action<int> printNumber = (number) => Console.WriteLine(number);
-
-this.Invoke(printNumber, val);
+Bool A ( int a,int b)
+{
+ return a==b;
+}
+```
+而Lambda的概念是，把上面 改成 輸入 => 黑箱=>輸出
+也就是：
+```csharp
+A= (a,b)=>(a==b)
 ```
 
-兩者的功能相同，都是定義了一個接受 int 參數並輸出到控制台的匿名函式。然而，Lambda 表達式相對於匿名方法具有以下差異：
-
-1. 語法簡潔：Lambda 表達式使用箭頭運算符 (=>) 來表示函式體，比使用匿名方法的 delegate 關鍵字更簡潔。
-
-2. 型別推斷：Lambda 表達式可以進行型別推斷，不需要顯式指定參數的型別，編譯器可以根據上下文自動推斷。
-
-3. 支援表達式樹：Lambda 表達式可以用於表達式樹 (Expression Tree) 的建構，使其在某些情況下能夠進行更高級的操作。
-
-總的來說，Lambda 表達式相對於匿名方法更加簡潔和方便，並且提供了更多的功能和彈性。因此，在 C# 中，Lambda 表達式已經成為定義匿名函式的首選語法。
-
-
----  
-匿名函數有兩種語法風格：Lambda表達式(lambda-expression)和匿名方法表達式(anonymous-method-expression)。在幾乎所有的情況下，Lambda表達式都比匿名方法表達式更爲簡介具有表現力。但現在C#語言中仍保留了後者，爲了向後兼容。  
-　　Lambda表達式：
-　　　　async可選 (匿名的函數簽名)=> (匿名的函數體)  
-　　匿名方法表達式：
-　　　　async可選 delegate (顯式的匿名函數簽名) 可選{代碼塊}  
-
-　　其中匿名的函數簽名可以包括兩種，一種是隱式的匿名函數簽名另一種是顯式的匿名函數簽名：  
-　　　　隱式的函數簽名：(p)、(p1,p1)  
-　　　　顯式的函數簽名：(int p)、(int p1,int p2)、(ref int p1,out int p2)
-
 ---
-# Action<int> 是一個委派 (delegate) 類型  這種東西有很多嗎
+### Action<int> 是一個委派 (delegate) 類型  這種東西有很多嗎
 是的，C# 中有許多內建的委派類型，用於表示不同類型的方法。以下是一些常見的委派類型：
 
 1. `Action`: 表示不返回任何值的方法。可以帶有零到多個參數。
@@ -78,4 +46,24 @@ this.Invoke(printNumber, val);
 除了這些內建的委派類型，你還可以自定義自己的委派類型，以滿足特定的需求。委派類型可以提高代碼的可讀性和靈活性，並促進代碼的重用性和模塊化設計。
 
 --- 
+### `Func<>`  基本寫法    加上如何接回傳值
+```csharp
+// Func<TResult>：表示無參數方法，返回 TResult 類型的值
+Func<int> func1 = () => 42; // 無參數，返回整數
 
+// Func<T, TResult>：表示一個參數方法，返回 TResult 類型的值
+Func<string, int> func2 = (s) => s.Length; // 接受一個字符串參數，返回字符串的長度
+
+// Func<T1, T2, TResult>：表示兩個參數方法，返回 TResult 類型的值
+Func<int, int, int> func3 = (x, y) => x + y; // 接受兩個整數參數，返回它們的和
+
+// 調用 Func 並接收返回值
+int result1 = func1();           // 無參數，返回 42
+int result2 = func2("Hello");    // 接受一個字符串參數，返回字符串的長度
+int result3 = func3(10, 20);      // 接受兩個整數參數，返回它們的和
+
+// 顯示結果
+Console.WriteLine("Result 1: " + result1);
+Console.WriteLine("Result 2: " + result2);
+Console.WriteLine("Result 3: " + result3);
+```

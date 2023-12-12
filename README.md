@@ -16,7 +16,7 @@
 ### 執行緒相關
 [多執行緒 配合委派 刷新UI](/multithreading/multithreading.md)  
 [匿名 跟 Lambda  的差異](/Anonymous_Lambda/Anonymous_Lambda.md)  
-
+[子執行緒  如何取得 UI執行緒上的值](/multithreading/how_to_get_value_of_ui_thread.md)  
 ---
 ### 異常處理 例外處理
 [異常處理 例外處理](/Exception/Exception.md)  
