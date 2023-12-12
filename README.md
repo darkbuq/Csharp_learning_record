@@ -1,5 +1,9 @@
 ## 目前以這種方式 紀錄曾經會過的技術
 
+### C# 自定義類別  
+[屬性 Property => public vs. set&get](/Class/Class.md)  
+
+---
 ### C# 原生容器  
 [多個回傳值 就用Tuple吧](/Tuple/Tuple.md)  
 [最像excel的 DataTable](/DataTable/DataTable.md)

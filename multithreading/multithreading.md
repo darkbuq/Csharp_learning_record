@@ -10,7 +10,7 @@
 ```csharp
 private void btn_start_Click(object sender, EventArgs e)
 {
-    thr = new Thread(ShowMessage);//裡面有個迴圈  在背景執行緒跑
+    thr = new Thread(ShowMessage);//ShowMessage裡面有個迴圈 在背景執行緒跑
     thr.Start();
 }
 
@@ -18,7 +18,7 @@ private delegate void delegate1(int sMessage);//宣告一個委派
 int i = 0;
 private void ShowMessage() //這個函數 在另外的執行緒上跑
 {
-    delegate1 dd1 = new delegate1(refreshUI);//生成一個委派
+    delegate1 dd1 = new delegate1(refreshUI);//生成一個委派 裡面的函數就是要刷新UI控件的
     while (true)
     {
         this.Invoke(dd1, i);
