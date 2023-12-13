@@ -18,21 +18,20 @@ this.Invoke(printNumber, val);
   
 ---
 ### Lambda表達式  
-Lambda 表達式則是在 C# 3.0 中引入的一種簡潔的語法，用於表示匿名函式。  
-Lambda 表達式使用 `=>` 運算符，它的左側是輸入參數，右側是方法主體
+Lambda 表達式則是在 C# 3.0 中引入的  
+Lambda 表達式使用 `=>` 運算符 它的左側是輸入參數，右側是方法主體  
 原本常見寫一個方法像這樣：
 ```csharp
-Bool A ( int a,int b)
-{
- return a==b;
-}
-```
-而Lambda的概念是，把上面 改成 輸入 => 黑箱=>輸出
-也就是：
-```csharp
-A= (a,b)=>(a==b)
-```
+bool a=True;
+bool b=Flase;
 
+Bool A ( int a,int b){return a==b;}
+bool TF1 = A(a,b);
+
+//而Lambda的概念是，把上面 改成 輸入 => 黑箱=>輸出
+A = (a,b)=>(a==b)
+bool TF2 = A(a,b);
+```
 ---
 ### Action<int> 是一個委派 (delegate) 類型  這種東西有很多嗎
 是的，C# 中有許多內建的委派類型，用於表示不同類型的方法。以下是一些常見的委派類型：
