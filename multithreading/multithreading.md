@@ -22,13 +22,14 @@ private void ShowMessage() //這個函數 在另外的執行緒上跑
     while (true)
     {
         this.Invoke(dd1, i);
+        //裡面有委派給UI執行緒 去做專門刷新UI的函數 
 
         Thread.Sleep(1000);
         i++;
     }
 }
 
-private void refreshUI(int numm)
+private void refreshUI(int numm)//專門刷新UI的函數
 {
     textBox2.Text = numm.ToString();
 }
@@ -43,10 +44,12 @@ private void btn_stop_Click(object sender, EventArgs e)
 如果背景的執行緒  有很多部位  需要刷新UI  
 那就要做很多   刷新UI的函數出來
 
-`每個不同時間段 刷新的UI`  
-1. `不同的宣告委派` 
-2. 再來 `new委派`  
-3. 還需對映 `不同的函數刷新UI`
+>每個不同時間段 刷新的UI 
+>1. `不同的宣告委派` 
+>2. 再來 `new委派`  
+>3. 還需對映 `不同的函數刷新UI`  
+
+>這樣似乎有點蠢  
 
 ---  
 ### 多執行緒 委派到主執行緒 多部位刷新UI  如何寫.....
