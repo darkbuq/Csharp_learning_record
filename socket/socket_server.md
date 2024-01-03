@@ -1,10 +1,10 @@
 ## socket server  
-1. TcpListener
+1. new TcpListener
 2. waiting for client to connect --> AcceptTcpClient
 3. new thread to receive 
 4. use UI_thread to send message
 
-### TcpListener
+### new TcpListener
 ```csharp
 TcpListener server = new TcpListener(IPAddress.Parse("127.0.0.1"), 12345);
 ```

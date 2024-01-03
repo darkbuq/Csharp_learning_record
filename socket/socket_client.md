@@ -1,33 +1,84 @@
-## 目前以這種方式 紀錄曾經會過的技術
+## socket client
+1. new TcpClient
+2. new thread to receive
+3. use UI_thread to send message
 
-### C# 自定義類別  
-[屬性 Property => public vs. set&get](/Class/Class.md)  
 
----
-### C# 原生容器  
-[多個回傳值 就用Tuple吧](/Tuple/Tuple.md)  
-[最像excel的 DataTable](/DataTable/DataTable.md)
-
----
-### to excel
-[DataTable to Excel](/to_excel/to_excel.md)  
+### new TcpClient  
+```csharp
+TcpClient client = new TcpClient("127.0.0.1", 12345);
+```
 
 ---
-### 執行緒相關  
-[多執行緒 配合委派 刷新UI](/multithreading/multithreading.md)  
-[匿名 跟 Lambda  的差異](/Anonymous_Lambda/Anonymous_Lambda.md)  
-[子執行緒  如何取得 UI執行緒上的值](/multithreading/how_to_get_value_of_ui_thread.md)  
-[跨執行緒一箭三連](/multithreading/跨執行緒一箭三連.md)  
+### new thread to receive 
+```csharp
+receiveThread = new Thread(new ThreadStart(ReceiveMessages));
+receiveThread.Start();
+```
+
+```csharp
+private void ReceiveMessages()
+{
+    try
+    {
+        if (client == null || !client.Connected)
+        {
+            MessageBox.Show("not connect..");
+            return;
+        }
+
+
+        NetworkStream clientStream = client.GetStream();
+        byte[] message = new byte[4096];
+        int bytesRead;
+        while (true)
+        {
+            bytesRead = 0;
+
+            bytesRead = clientStream.Read(message, 0, 4096);
+            // NetworkStream.Read 方法是一個阻塞的方法，
+            // 它會一直等待，直到有資料可供讀取，
+            // 或者發生了例外情況（例如，連線關閉、超時等）。
+            // 這就是為什麼在這個 while 迴圈中，
+            // 當沒有資料可供讀取時，它會一直等待。
+
+            if (bytesRead == 0)
+                break;
+
+            string receivedMessage = Encoding.ASCII.GetString(message, 0, bytesRead);
+
+            // 顯示收到的訊息在 UI 上
+            Action<TextBox, string> reflashUI = (TextBox, strr) =>
+            {
+                TextBox.Text += strr + "\r\n";
+
+                TextBox.SelectionStart = TextBox.Text.Length;
+                TextBox.ScrollToCaret();
+            };
+            this.Invoke(reflashUI, txt_note, receivedMessage);
+        }
+    }
+    catch (Exception ex)
+    {
+        MessageBox.Show($"Error receiving message: {ex.Message}");
+    }
+}
+```
 
 ---
-### 異常處理 例外處理
-[異常處理 例外處理](/Exception/Exception.md)  
-[轉型失敗的 異常](/TryParse/TryParse.md)  
+### use UI_thread to send message
+```csharp
+private void btn_send_Click(object sender, EventArgs e)
+{
+    if (client == null || !client.Connected)
+    {
+        MessageBox.Show("Not connected to the server.");
+        return;
+    }
 
----
-### winForm相關
-[How can i foreach all buttons in winforms](/winForm/foreach_Control.md)  
-
----
-### SQL相關
-[SQL insert very large col table](/SQL/SQL.md)  
+    NetworkStream clientStream = client.GetStream();
+    byte[] data = Encoding.ASCII.GetBytes(message);
+    clientStream.Write(data, 0, data.Length);
+    clientStream.Flush();
+}
+```
