@@ -31,8 +31,3 @@
 ---
 ### SQL相關
 [SQL insert very large col table](/SQL/SQL.md)  
-
----
-### socket相關
-[socket_server](/socket/socket_server.md)  
-[socket_client](/socket/socket_client.md)  
