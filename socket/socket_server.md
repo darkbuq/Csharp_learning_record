@@ -2,6 +2,7 @@
 1. TcpListener
 2. waiting for client to connect --> AcceptTcpClient
 3. new thread to receive 
+4. use UI_thread to send message
 
 ### TcpListener
 ```csharp
@@ -65,6 +66,26 @@ private void receive(object clientObj)
         //Console.WriteLine($"Received: {receivedMessage}");
         Action<TextBox, string> reflashUI = (TextBox, strr) => TextBox.Text += strr + "\r\n";
         this.Invoke(reflashUI, txt_note, $"{receivedMessage}");
+    }
+}
+```
+
+---
+### use UI_thread to send message
+```csharp
+private void btn_send_Click(object sender, EventArgs e)
+{
+    string message = txt_send.Text;
+    try
+    {
+        NetworkStream clientStream = client.GetStream();
+        byte[] data = Encoding.ASCII.GetBytes(message);
+        clientStream.Write(data, 0, data.Length);
+        clientStream.Flush();
+    }
+    catch (Exception ex)
+    {
+        MessageBox.Show($"Error sending message to client: {ex.Message}");
     }
 }
 ```
