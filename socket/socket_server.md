@@ -70,14 +70,9 @@ private void receive(object clientObj)
 ```
 
 ---
-### new thread to receive
-
-#### while迴圈會卡在這一行  bytesRead = clientStream.Read(message, 0, 4096);   
+### while迴圈會卡在這一行  bytesRead = clientStream.Read(message, 0, 4096);   
 程式如果 呼叫  NetworkStream.Read  那就會一直等待  直到  讀到東西  
 才結束這一行 bytesRead = clientStream.Read(message, 0, 4096);  
-
----
-
 
 #### `NetworkStream.Read` 方法是一個阻塞的方法
 它會一直等待，直到有資料可供讀取，或者發生了例外情況（例如，連線關閉、超時等）  
