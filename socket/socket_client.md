@@ -12,7 +12,7 @@ TcpClient client = new TcpClient("127.0.0.1", 12345);
 ---
 ### new thread to receive 
 ```csharp
-receiveThread = new Thread(new ThreadStart(ReceiveMessages));
+receiveThread = new Thread(ReceiveMessages);
 receiveThread.Start();
 ```
 
@@ -51,7 +51,6 @@ private void ReceiveMessages()
             Action<TextBox, string> reflashUI = (TextBox, strr) =>
             {
                 TextBox.Text += strr + "\r\n";
-
                 TextBox.SelectionStart = TextBox.Text.Length;
                 TextBox.ScrollToCaret();
             };
