@@ -9,7 +9,7 @@
 這個包提供了 
 1. NI MAX  可以偵測現在GPIB連線的設備 及 下SCPI指令
 2. `Ivi.Visa.Interop` 是 NI 提供的 VISA COM 封裝的一部分 可以提供在 C# 開發 加入參考
-3. 實際 GBIP 的驅動程式
+3. 實際 GPIB 的驅動程式
   
 
 ```
