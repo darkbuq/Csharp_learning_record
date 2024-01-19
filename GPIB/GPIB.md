@@ -84,8 +84,18 @@ private void btn_SendAndRead_Click(object sender, EventArgs e)
 為何  我在使用  Ivi.Visa.Interop  只需加入參考  不用在winform 上加using
 
 ```
-在 .NET 框架中，當你在 Visual Studio 中使用 COM Interop（元件互通性）引用時，有時候在程式碼中不需要加入 `using` 陳述式來引用相關的命名空間，這是因為 COM Interop 引用會自動處理對 COM 對象的引用。這是一個在使用 COM Interop 時的常見行為。
+在 .NET 框架中，
+當你在 Visual Studio 中使用 COM Interop（元件互通性）引用時，
+有時候在程式碼中不需要加入 `using` 陳述式來引用相關的命名空間，
+這是因為 COM Interop 引用會自動處理對 COM 對象的引用。
+這是一個在使用 COM Interop 時的常見行為。
 
-在你的情境中，`Ivi.Visa.Interop` 這個命名空間可能已經在 COM Interop 引用中被處理了，所以你在程式碼中不需要手動加入 `using`。這在使用 COM 對象時是一個方便的功能，因為你不需要額外的設定，而是直接使用 COM 對象提供的方法和屬性。
+在你的情境中，
+`Ivi.Visa.Interop` 這個命名空間可能已經在 COM Interop 引用中被處理了，
+所以你在程式碼中不需要手動加入 `using`。
+這在使用 COM 對象時是一個方便的功能，
+因為你不需要額外的設定，而是直接使用 COM 對象提供的方法和屬性。
 
-請注意，這種自動加入 `using` 的行為僅適用於 COM Interop，對於其他 .NET 組件，你仍然需要使用 `using` 來引用相關的命名空間。如果有任何進一步的問題或需要更多解釋，請隨時告訴我。```
+請注意，這種自動加入 `using` 的行為僅適用於 COM Interop，對於其他 .NET 組件，
+你仍然需要使用 `using` 來引用相關的命名空間。
+如果有任何進一步的問題或需要更多解釋，請隨時告訴我。```
