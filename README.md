@@ -40,3 +40,27 @@
 ---
 ### GPIB相關
 [GPIB](/GPIB/GPIB.md)  
+
+---
+### SOLID + LoD
+在開始介紹前大家可以思考一下以下的開發情境
+
+    + 開發的時間長? 還是維護的時間較長?  
+    + 有團隊一起開發? 還是一個人寫Code?  
+    + 一個長期維護的專案，需求變更頻繁度?  
+    + 你如何讓程式碼具備可讀性與擴充性  
+    + 如何避免在修改程式的過程中引發連鎖反應?(改A壞B)  
+
+
+
+[單一職責原則 Single Responsibility Principle (SRP)](/GPIB/GPIB.md)  
+[開放封閉原則 Open-Closed Principle (OCP)](/GPIB/GPIB.md)  
+[里氏替換原則 Liskov Substitution Principle (LSP)](/GPIB/GPIB.md)  
+[介面隔離原則 Interface Segregation Principle (ISP)](/GPIB/GPIB.md)  
+[依賴反轉原則 Dependency Inversion Principle (DIP)](/SOLID/DIP.md)  
+[迪米特法則 Least Knowledge Principle (LOD)](/GPIB/GPIB.md)  
+
+---
+後續研究課題  
+
+[DI（依賴注入） 定義、跟 IoC（控制反轉）和 DIP（依賴反轉原則）的關係、優缺點](https://medium.com/wenchin-rolls-around/%E6%B7%BA%E5%85%A5%E6%B7%BA%E5%87%BA-dependency-injection-ea672ba033ca)  
