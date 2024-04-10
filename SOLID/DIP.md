@@ -26,7 +26,41 @@ DIP 是個使用抽象時依賴關係的準則或概念，IoC 說明了依賴關
 - 方法注入
 
 ---
-### 建構子注入
+### 建構子注入  
+原本程式碼   高層模組依賴低層模組
+```csharp
+public class Message
+{
+    public void SendMessage()
+    {
+        Console.WriteLine("Message Sent");
+    }
+}
+public class Notification
+{
+    private Message _msg;
+
+    public Notification()
+    {
+        _msg = new Message();
+    }
+    public void PromotionalNotification()
+    {
+        _msg.SendMessage();
+    }
+}
+class Program
+{
+    public static void Main()
+    {
+        Notification notify = new Notification();
+        notify.PromotionalNotification();
+    }
+}
+```
+
+後來程式碼   高層模組不依賴低層模組
+控制權也跟著反轉過來了，高階模組從主動建立低階模組，變成被動接收低階模組；也就是從原先的 高階模組 —(建立)→ 低階模組，變成了 高階模組 ←(傳遞低階模組)— 控制反轉中心
 ```csharp
 public interface IMessage
 {
