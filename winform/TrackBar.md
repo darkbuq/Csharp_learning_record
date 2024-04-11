@@ -37,5 +37,6 @@ private void debounceTimer_Tick(object sender, EventArgs e)
 
 因為 `Timer` 有設定響應頻率  
 所以動作可以控制再一個時間間隔上才響應
+就不會 `過度作動`
 
 
