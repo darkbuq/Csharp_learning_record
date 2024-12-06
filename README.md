@@ -26,6 +26,7 @@
 [匿名 跟 Lambda  的差異](/Anonymous_Lambda/Anonymous_Lambda.md)  
 [子執行緒  如何取得 UI執行緒上的值](/multithreading/how_to_get_value_of_ui_thread.md)  
 [跨執行緒一箭三連](/multithreading/跨執行緒一箭三連.md)  
+[ManualResetEvent 控制執行緒](/multithreading/ManualResetEvent.md)  
 
 ---
 ### 異常處理 例外處理
