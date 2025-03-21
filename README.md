@@ -8,6 +8,11 @@
 [屬性 Property => public vs. set&get](/Class/Class.md)  
 
 ---
+### C# Lambda 表達式  
+[來個小範例](/Lambda/Lambda01.md)  
+[最像excel的 DataTable](/DataTable/DataTable.md)  
+
+---
 ### C# 原生容器  
 [多個回傳值 就用Tuple吧](/Tuple/Tuple.md)  
 [最像excel的 DataTable](/DataTable/DataTable.md)  
