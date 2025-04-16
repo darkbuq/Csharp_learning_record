@@ -30,7 +30,7 @@ prop + Tab + Tab
 ```csharp
 private void btn_insert_Click(object sender, EventArgs e)
 {
-    string connStr = "uid=sa;pwd=dsc;database=FormericaOE;server=dataserver";
+    string connStr = "uid=xxx;pwd=xxx;database=FormericaOE;server=dataserver";
 
     var data = new Pam4FinalTestRecord
     {
@@ -66,7 +66,7 @@ private void btn_insert_Click(object sender, EventArgs e)
 private void btn_query_Click(object sender, EventArgs e)
 {
     string connStr = "uid=xxx;pwd=xxx;database=FormericaOE;server=dataserver";
-    
+
     string sql = "SELECT * FROM PAM4_FinalTest WHERE SN = @SN";
 
     using (var conn = new SqlConnection(connStr))
