@@ -2,6 +2,12 @@
 
 ### 雜項
 [在子類別建構函式中呼叫基底類別建構函數   : base(name)](/calling_the_base_constructor.md)
+
+---
+
+### C# null運算子  
+[null運算子](/null/null.md)  
+
 ---
 
 ### C# 自定義類別  
@@ -44,6 +50,7 @@
 ---
 ### SQL相關
 [SQL insert very large col table](/SQL/SQL.md)  
+[SQL using Dapper](/SQL/SQL_using_Dapper.md.md)  
 
 ---
 ### socket相關
