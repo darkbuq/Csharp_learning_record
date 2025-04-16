@@ -50,7 +50,8 @@
 ---
 ### SQL相關
 [SQL insert very large col table](/SQL/SQL.md)  
-[SQL using Dapper](/SQL/SQL_using_Dapper.md.md)  
+[SQL using Dapper](/SQL/SQL_using_Dapper.md)  
+[SQL using Dapper_02](/SQL/SQL_using_Dapper_02.md)  
 
 ---
 ### socket相關
