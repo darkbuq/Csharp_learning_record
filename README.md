@@ -3,6 +3,7 @@
 ### 雜項
 [在子類別建構函式中呼叫基底類別建構函數   : base(name)](/Miscellaneous/calling_the_base_constructor.md)  
 [app.config 或 settings.json](/Miscellaneous/app_config_settings_json.md)
+[Two's Complement 二補數法](/Miscellaneous/Two_s_Complement.md)
 
 ---
 
