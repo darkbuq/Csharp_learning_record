@@ -1,6 +1,8 @@
 ## 目前以這種方式 紀錄曾經會過的技術
 
 ### 雜項
+
+[加入參考 設備商提供的DLL](/Miscellaneous/Add_reference.md)  
 [在子類別建構函式中呼叫基底類別建構函數   : base(name)](/Miscellaneous/calling_the_base_constructor.md)  
 [app.config 或 settings.json](/Miscellaneous/app_config_settings_json.md)  
 [Two's Complement 二補數法](/Miscellaneous/Two_s_Complement.md)
