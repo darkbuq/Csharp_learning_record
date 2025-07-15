@@ -67,6 +67,10 @@
 [GPIB](/GPIB/GPIB.md)  
 
 ---
+### async_await 非同步  異步  相關 
+[基本型 理解用](/async_await/async_await.md)  
+
+---
 ### SOLID + LoD
 在開始介紹前大家可以思考一下以下的開發情境
 
