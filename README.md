@@ -69,6 +69,8 @@
 ---
 ### async_await 非同步  異步  相關 
 [基本型 理解用](/async_await/async_await.md)  
+[沒有太多等待時  使用Task_Run](/async_await/Task_Run.md)  
+[沒有太多等待時  使用Task_Run  for winform](/async_await/Task_Run_for_winform.md)  
 
 ---
 ### SOLID + LoD
