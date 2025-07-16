@@ -1,3 +1,23 @@
+## 基本理解
+### Lambda表達式  
+
+原本常見寫一個方法像這樣：
+```csharp
+Bool A ( int a,int b)
+{
+ return a==b;
+}
+bool FT = A(a,b); //調用回傳值
+```
+而Lambda的概念是，把上面 改成 輸入 => 黑箱=>輸出
+也就是：
+```csharp
+A = (a,b)=>(a==b)
+bool FT = A(a,b); //調用回傳值
+```
+
+---
+
 ## 來個小範例
 #### 設vcc_val 是 double[]  如何一行印出
 ```csharp
