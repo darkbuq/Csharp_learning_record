@@ -2,6 +2,8 @@
 
 ```csharp
 public void autoScale() => Thread.Sleep(500);
+
+public string Query_power() => "NA";  //這是第二種型態
 ```
 
 這裡的 `=>` 不是「lambda」  
