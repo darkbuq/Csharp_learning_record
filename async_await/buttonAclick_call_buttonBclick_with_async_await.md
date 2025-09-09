@@ -96,13 +96,17 @@ private async void Button1_Click(object sender, EventArgs e)
 
 ### 假設我有三大功能按鍵  我要保有按鍵獨立使用
 
-其中這個全程自己跑 無所謂 
+其中這個全程自己跑 無所謂  
+```csharp
 private async void btn_Tx_test_Click(object sender, EventArgs e)  
+```
   
   
 下面這兩個 要順序跑  
+```csharp
 private async void btn_RX_Assert_DeAssert_LOS_VoltHL_Click(object sender, EventArgs e)  
 private async void btn_DDMI_Click(object sender, EventArgs e)
+```
 
 
 ============  
