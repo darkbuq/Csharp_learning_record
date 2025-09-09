@@ -72,6 +72,7 @@
 [基本型 理解用](/async_await/async_await.md)  
 [沒有太多等待時  使用Task_Run](/async_await/Task_Run.md)  
 [沒有太多等待時  使用Task_Run  for winform](/async_await/Task_Run_for_winform.md)  
+[A按鍵 呼叫 B按鍵事件 事件中有async await](/async_await/buttonAclick_call_buttonBclick_with_async_await.md) 
 
 ---
 ### SOLID + LoD
