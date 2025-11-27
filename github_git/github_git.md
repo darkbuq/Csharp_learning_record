@@ -76,7 +76,12 @@ git push -u origin main
 ---
 
 # 🎉 完成之後，你就能：
+## 空目錄可以直接clone 
+```bash
+git clone http://github.com/帳號/儲存庫名  
+```
 
+# 之後
 ## **你：push**
 
 ```bash
