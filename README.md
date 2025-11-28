@@ -96,4 +96,10 @@
 ---
 後續研究課題  
 
-[DI（依賴注入） 定義、跟 IoC（控制反轉）和 DIP（依賴反轉原則）的關係、優缺點](https://medium.com/wenchin-rolls-around/%E6%B7%BA%E5%85%A5%E6%B7%BA%E5%87%BA-dependency-injection-ea672ba033ca)  
+[DI（依賴注入） 定義、跟 IoC（控制反轉）和 DIP（依賴反轉原則）的關係、優缺點](https://medium.com/wenchin-rolls-around/%E6%B7%BA%E5%85%A5%E6%B7%BA%E5%87%BA-dependency-injection-ea672ba033ca) 
+
+---
+
+[github & git 常見架構](/github_git/github_git_01.md)  
+[github & git branch(分支)常見方式](/github_git/github_git_branch.md)  
+
