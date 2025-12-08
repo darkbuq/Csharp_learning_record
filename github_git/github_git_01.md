@@ -70,8 +70,11 @@ git remote add origin https://github.com/你的帳號/你的repo.git
 git branch -M main
 git push -u origin main
 ```
+git branch -M main 這是一個 Git 命令，它的意思是：
 
-推上去後，GitHub 上就會出現你的整個專案！
+將當前所在的分支（通常是 master 或舊的預設分支）強制重新命名（Move）為 main 分支
+
+### 推上去後，GitHub 上就會出現你的整個專案！
 
 ---
 
