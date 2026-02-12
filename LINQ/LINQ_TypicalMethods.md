@@ -44,14 +44,4 @@ int total = numbers.Sum();                      // 70
 decimal totalPrice = products.Sum(p => p.Price);
 ```
 
-### 一句話總結這七個方法的心法
-
-- **Where** → 過濾（像 SQL 的 WHERE）
-- **Select** → 轉型 / 挑選（像 SQL 的 SELECT）
-- **Any** → 找得到嗎？（像 exists）
-- **OrderBy** → 排序（像 ORDER BY）
-- **GroupBy** → 分組（像 GROUP BY）
-- **Count** → 算筆數（像 COUNT(*)）
-- **Sum** → 加總（像 SUM(欄位)）
-
 
