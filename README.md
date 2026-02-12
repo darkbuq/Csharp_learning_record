@@ -23,6 +23,10 @@
 [來個小範例](/Lambda/Lambda01.md)  
 
 ---
+### C# LINQ  
+[LINQ 常見用法](/LINQ/LINQ_TypicalMethods.md)  
+
+---
 ### C# 原生容器  
 [多個回傳值 就用Tuple吧](/Tuple/Tuple.md)  
 [最像excel的 DataTable](/DataTable/DataTable.md)  
