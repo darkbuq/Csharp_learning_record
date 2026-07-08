@@ -51,6 +51,16 @@ public static async Task WaitExampleAsync()
 }
 ```
 
+```
+Start async wait...2026/7/8 上午 11:39:19
+Main doing other work... 0..2026/7/8 上午 11:39:19
+Main doing other work... 1..2026/7/8 上午 11:39:20
+Finished waiting asynchronously!.....2026/7/8 上午 11:39:21
+Main doing other work... 2..2026/7/8 上午 11:39:21
+Main doing other work... 3..2026/7/8 上午 11:39:22
+Main doing other work... 4..2026/7/8 上午 11:39:23
+```
+
 ---
 ### 一點小想法
 
