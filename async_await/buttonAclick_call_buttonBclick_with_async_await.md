@@ -211,9 +211,53 @@ private async void btn_1V1T_AutoRun_Click(object sender, EventArgs e)
 2. 自動流程中，`RxAssertAsync` 和 `DdmiAsync` 可以順序執行（`await`）。
 3. Tx test 可在自動流程中同時執行，不影響後面流程（fire-and-forget，前面加 `_ = ...`）。
 
+
 ---
 
 
+```csharp
+this.Invoke(new Action(() => dgv.Rows[i].Cells["pass_fail"].Value = "換頁失敗"));
+```
 
+---
 
+### 一行一行拆解：
+
+1. **`this.Invoke(...)`**
+   - `this` 通常是指目前的 Form 或 UserControl。
+   - `Invoke` 是 Control 類別提供的方法，用來**把程式碼切換到 UI 執行緒**執行。
+   - 為什麼需要？因為你很可能在**背景執行緒**（例如 Thread、Task、BackgroundWorker）裡呼叫這段，如果直接改 `dgv` 會發生「跨執行緒操作無效」的錯誤。
+
+2. **`new Action(...)`**
+   - `Action` 是 .NET 內建的委派（Delegate）型別，代表「沒有回傳值的方法」。
+   - `new Action(...)` 就是在建立一個委派物件。
+
+3. **`(() => ...)`** ← Lambda 運算式
+   - 這是 C# 的匿名函式（Lambda）。
+   - `()` 表示這個方法**沒有參數**。
+   - `=>` 後面就是你要執行的程式碼。
+
+4. **`dgv.Rows[i].Cells["pass_fail"].Value = "換頁失敗"`**
+   - 這是你真正想執行的 UI 更新動作。
+
+---
+
+### 完整結構圖解：
+
+```
+this.Invoke(                  ← 要求 UI 執行緒執行
+    new Action(               ← 建立一個沒有參數、沒有回傳值的方法
+        () =>                 ← 匿名方法開始
+            dgv.Rows[i].Cells["pass_fail"].Value = "換頁失敗"   ← 實際要做的動作
+    )
+);
+```
+
+---
+
+### 為什麼要寫得這麼複雜？
+
+因為 `Invoke` 方法需要收到一個 **Delegate**（委派），而 Lambda 是最方便產生 Delegate 的方式。
+
+---
 
